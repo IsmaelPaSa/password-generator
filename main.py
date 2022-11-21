@@ -44,6 +44,34 @@ class Generator:
 
 
 if __name__ == "__main__":
-    gen = Generator()
-    print(gen.classic_generator(4, 4, 4, 4))
-    print(gen.quetzal_generator(8, 4, 4))
+    import sys
+    if '--help' in sys.argv:
+        print("quezal-mode: python3", sys.argv[0], "--quetzal", "--letters [#]", "--numbers [#]", "--symbols [#]")
+        print("classic-mode: python3", sys.argv[0], "--classic", "--upper [#]", "--lower [#]", "--numbers [#]", "--symbols [#]")
+        sys.exit(0)
+    if '--version' in sys.argv:
+        print("Password-generator", "2.0.0", "'delta'")
+        print("Pasa-san, (c) 2022")
+        sys.exit(0)
+    if '--quetzal' in sys.argv:
+        try:
+            letters = int(sys.argv[sys.argv.index("--letters") + 1])
+            numbers = int(sys.argv[sys.argv.index("--numbers") + 1])
+            symbols = int(sys.argv[sys.argv.index("--symbols") + 1])
+            gen = Generator()
+            print(gen.quetzal_generator(letters, numbers, symbols))
+            sys.exit(0)
+        except Exception as e:
+            print(e)
+    if '--classic' in sys.argv:
+        try:
+            upper = int(sys.argv[sys.argv.index("--upper") + 1])
+            lower = int(sys.argv[sys.argv.index("--lower") + 1])
+            numbers = int(sys.argv[sys.argv.index("--numbers") + 1])
+            symbols = int(sys.argv[sys.argv.index("--symbols") + 1])
+            gen = Generator()
+            print(gen.classic_generator(lower, upper, numbers, symbols))
+            sys.exit(0)
+        except Exception as e:
+            print(e)
+    print("use '--help'")
